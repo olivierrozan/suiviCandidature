@@ -1,0 +1,35 @@
+
+<h2>Update</h2>
+{{ data }}
+<form ng-submit="">
+    <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-sm>
+            <label>Nom</label>
+            <input name="label" type="text" ng-model="consulte.label">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Adresse</label>
+            <input name="address" type="text" ng-model="consulte.address">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-sm>
+            <label>Poste</label>
+            <input name="jobLabel" type="text" ng-model="consulte.jobLabel">
+        </md-input-container>
+    </div>
+    <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-sm>
+            <label>Email</label>
+            <input name="email" type="email" ng-model="consulte.email">
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Commentaires</label>
+            <input name="commentaries" ng-model="com">
+        </md-input-container>
+    </div>
+    <div layout-gt-xs="row">
+        <md-button class="md-raised md-primary" type="submit">Update</md-button>
+    </div>
+</form>

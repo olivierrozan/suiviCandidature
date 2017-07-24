@@ -3,7 +3,7 @@ require_once '../db.php';
 
 $query1="select * from sheet order by id desc";
 
-$result1 = $mysqli->query($query1) or die($mysqli->error.__LINE__);
+$result1 = $db->query($query1) or die($db->error.__LINE__);
 
 $arr = array();
 

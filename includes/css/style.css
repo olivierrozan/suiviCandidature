@@ -3,36 +3,13 @@ body {
     padding:0px;
     color:black;
     font-weight:bold;
-    /*font-family: "Marko One";*/
+    
     font-family: "Verdana", "Arial", "sans-serif";
 }
 
 h1 {
-  color: white;
-}
-
-#menu {
-    margin:auto;
-    width:1000px;
-}
-
-header {
-   /*background:#2056ac;*/
-   background:rgb(185,122,87);
-   color:white;
-   
-   margin:0px;
-   padding:10px;
-   font-size:24px;
-   
-}
-
-h1 {
     text-align: center;
-}
-
-button:hover, #button:hover {
-    background: #20AADB;
+    color: white;
 }
 
 input {

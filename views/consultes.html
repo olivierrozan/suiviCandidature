@@ -51,7 +51,7 @@
 			<div layout-gt-xs="row">
 				<md-input-container class="md-block" flex-sm>
 					<label>Nom</label>
-					<input name="label" type="text" ng-model="consulte.name">
+					<input name="label" type="text" ng-model="consulte.label">
 				</md-input-container>
 
 				<md-input-container class="md-block" flex-gt-xs>
@@ -68,15 +68,6 @@
 				<md-input-container class="md-block" flex-sm>
 					<label>Email</label>
 					<input name="email" type="email" ng-model="consulte.email">
-				</md-input-container>
-
-				<md-input-container class="md-block" flex-sm>
-					<md-select name="status" ng-model="consulte.state" placeholder="Etat">
-						<md-option value="axe">En attente</md-option>
-						<md-option value="sword">Relancé</md-option>
-						<md-option value="wand">Entretien</md-option>
-						<md-option value="pen">Refusé</md-option>
-					</md-select>
 				</md-input-container>
 
 				<md-input-container class="md-block" flex-gt-xs>
@@ -110,10 +101,10 @@
 				<!-- <td>{{p.commentaires}}</td> -->
 				<td>{{p.etat}}</td>
 				<td>
-					<md-button class="md-raised md-primary">Relancer</md-button>
+					<md-button class="md-raised md-primary" ng-click="consulte.relance(p.id)">Relancer</md-button>
 				</td>
 				<td>
-					<md-button class="md-raised md-warn">modifier</md-button>
+					<md-button class="md-raised md-warn" ng-click="consulte.showAdvanced($event, consulte.sheet)">modifier</md-button>
 				</td>
 			</tr>
 		</table>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Suivi Candidature</title>
+
+	<script src="includes/js/angular.min.js"></script>
+	<script src="includes/js/angular-route.min.js"></script>
+
+	<script src="includes/js/angular-material.min.js"></script>
+	<script src="includes/js/angular-animate.min.js"></script>
+	<script src="includes/js/angular-aria.min.js"></script>
+	<script src="includes/js/angular-sanitize.min.js"></script>
+	<script src="includes/js/moment.js"></script>
+	<script src="node_modules/moment/locale/fr.js"></script>
+
+	<link rel="stylesheet" href="includes/css/angular-material.min.css">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="includes/css/style.css" />
+
+	<!-- Latest compiled and minified JavaScript -->
+
+	<link href="https://fonts.googleapis.com/css?family=Verdana" rel="stylesheet">
+</head>
+
+<body>
+	<div ng-cloak>
+		<md-content>
+
+			<md-toolbar class="md-hue-2">
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+					</md-button>
+
+					<h2 flex md-truncate>Suivi Candidature</h2>
+
+					<md-button class="md-icon-button" aria-label="Favorite">
+					</md-button>
+
+					<md-button class="md-icon-button" aria-label="More">
+					</md-button>
+				</div>
+			</md-toolbar>
+			
+		</md-content>
+	</div>
+
+	<div ng-view></div>
+	<script src="controllers/main.js"></script>
+	<script src="routage.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+<div layout="row" layout-align="center center">
+	<div>
+		<md-menu-bar>
+			<md-menu>
+				<md-button class="md-raised md-primary" ng-click="">
+					Voir tout
+				</md-button>
+				<md-menu-content>
+				</md-menu-content>
+			</md-menu>
+			<md-menu>
+
+				<md-button class="md-raised md-primary" ng-click="$mdMenu.open()">
+					Voir seulement
+				</md-button>
+				<md-menu-content width="3">
+					<md-menu-item>
+						<md-button ng-click="">
+							En attente
+						</md-button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<md-button ng-click="">
+							Relancé
+						</md-button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<md-button ng-click="">
+							Entretien
+						</md-button>
+					</md-menu-item>
+
+					<md-menu-item>
+						<md-button ng-click="">
+							Refusé
+						</md-button>
+					</md-menu-item>
+				</md-menu-content>
+			</md-menu>
+
+			<span>{{ consulte.count }} lignes au total</span>
+		</md-menu-bar>
+
+		<md-button class="md-raised md-primary" ng-click="consulte.showAddForm()">
+			Ajouter
+		</md-button>
+
+		<form ng-if="consulte.isAddDisplayed" ng-submit="consulte.add()">
+			<div layout-gt-xs="row">
+				<md-input-container class="md-block" flex-sm>
+					<label>Nom</label>
+					<input name="label" type="text" ng-model="consulte.name">
+				</md-input-container>
+
+				<md-input-container class="md-block" flex-gt-xs>
+					<label>Adresse</label>
+					<input name="address" type="text" ng-model="consulte.address">
+				</md-input-container>
+
+				<md-input-container class="md-block" flex-sm>
+					<label>Poste</label>
+					<input name="jobLabel" type="text" ng-model="consulte.jobLabel">
+				</md-input-container>
+				</div>
+				<div layout-gt-xs="row">
+				<md-input-container class="md-block" flex-sm>
+					<label>Email</label>
+					<input name="email" type="email" ng-model="consulte.email">
+				</md-input-container>
+
+				<md-input-container class="md-block" flex-sm>
+					<md-select name="status" ng-model="consulte.state" placeholder="Etat">
+						<md-option value="axe">En attente</md-option>
+						<md-option value="sword">Relancé</md-option>
+						<md-option value="wand">Entretien</md-option>
+						<md-option value="pen">Refusé</md-option>
+					</md-select>
+				</md-input-container>
+
+				<md-input-container class="md-block" flex-gt-xs>
+					<label>Commentaires</label>
+					<input name="commentaries" ng-model="com">
+				</md-input-container>
+
+				<md-button class="md-raised md-primary" type="submit">Ajouter</md-button>
+			</div>
+		</form>
+
+		<table border="1">
+			<tr>
+				<th>NOM</th>
+				<!-- <th>ADRESSE</th> -->
+				<!-- <th>POSTE</th> -->
+				<th>EMAIL</th>
+				<th>DATE MODIF</th>
+				<!-- <th>COMMENTAIRES</th> -->
+				<th>ETAT</th>
+				<th></th>
+				<th></th>
+			</tr>
+
+			<tr ng-repeat="p in consulte.sheet" ng-model="consulte.sheet">
+				<td>{{p.nom}}</td>
+				<!-- <td>{{p.adresse}}</td> -->
+				<!-- <td>{{p.poste}}</td> -->
+				<td>{{p.email}}</td>
+				<td>{{p.date_modif}}</td>
+				<!-- <td>{{p.commentaires}}</td> -->
+				<td>{{p.etat}}</td>
+				<td>
+					<md-button class="md-raised md-primary">Relancer</md-button>
+				</td>
+				<td>
+					<md-button class="md-raised md-warn">modifier</md-button>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<div ng-controller="detailsCtrl" class="container">
+	<div>
+		<h2 class="form-signin-heading">details {{ id }}</h2>
+
+		<a href="#/recherche"><button class="btn btn-sm btn-info">Retour</button></a>
+		<br /><br />
+		<ul class="list-group" style="width:;">
+			<div ng-repeat="p in panneaux">
+				<li class="list-group-item" ng-if="p.reference === id">
+					<img src="{{ p.imageVignette }}" alt="img" />
+				
+					<span>{{ p.reference }} : {{ p.nom }}</span>
+					<span style="margin-left:500px;">Nombre de vues : {{ p.nbVues }}</span>
+				</li>
+			</div>
+		</div>
+	</div>
+</div>

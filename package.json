@@ -1,0 +1,22 @@
+{
+  "name": "suivicandidature",
+  "version": "1.0.0",
+  "description": "",
+  "main": "routage.js",
+  "dependencies": {
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-sanitize": "^1.6.5",
+    "angular-route": "^1.6.5",
+    "angular-material": "^1.1.4",
+    "angular": "^1.6.5"
+  },
+  "devDependencies": {
+    "moment": "^2.18.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ROZAN_000",
+  "license": "ISC"
+}

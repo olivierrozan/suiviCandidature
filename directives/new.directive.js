@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -21,13 +21,14 @@
             }
         };
         return directive;
-        
+
         function link(scope, element, attrs) {
-            console.log('DIR');
+
+            
         }
     }
     /* @ngInject */
-    function ControllerController () {
-        
+    function ControllerController() {
+
     }
 })();

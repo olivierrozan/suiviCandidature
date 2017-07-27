@@ -23,28 +23,28 @@
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label>Nom</label>
-				<input name="label" type="text" ng-model="consulte.label">
+				<input name="label" type="text" ng-model="consulte.addApplication.nom">
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Adresse</label>
-				<input name="address" type="text" ng-model="consulte.address">
+				<input name="address" type="text" ng-model="consulte.addApplication.adresse">
 			</md-input-container>
 
-			<md-input-container class="md-block" flex-sm>
+			<!-- <md-input-container class="md-block" flex-sm>
 				<label>Poste</label>
-				<input name="jobLabel" type="text" ng-model="consulte.jobLabel">
-			</md-input-container>
+				<input name="jobLabel" type="text" ng-model="consulte.poste">
+			</md-input-container> -->
 		</div>
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label>Email</label>
-				<input name="email" type="email" ng-model="consulte.email">
+				<input name="email" type="email" ng-model="consulte.addApplication.email">
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Commentaires</label>
-				<input name="commentaries" ng-model="com">
+				<input name="commentaries" type="text" ng-model="consulte.addApplication.commentaires">
 			</md-input-container>
 
 			<md-button class="md-raised md-primary" type="submit">Valider</md-button>
@@ -59,11 +59,11 @@
 			<th>DATE MODIF</th>
 			<th>COMMENTAIRES</th>
 			<th>ETAT</th>
-			<th></th>
+			<th>PROCHAINE RELANCE</th>
 			<th></th>
 		</tr>
 
-		<tr ng-repeat="p in consulte.sheet" ng-model="consulte.sheet">
+		<tr ng-class="{ 'blue': p.etat === 'Entretien', 'red': p.etat === 'Refusé' }" state="{{p.etat} }" ng-repeat="p in consulte.sheet" ng-model="consulte.sheet">
 			<form>
 				<td>{{p.nom}}</td>
 				<td>{{p.adresse}}</td>
@@ -73,10 +73,10 @@
 				<td>{{p.etat}}</td>
 			</form>
 			<td>
-				<md-button class="md-raised md-primary" ng-click="consulte.relance(p.id)">Relancer</md-button>
+				<md-button new time="{{p.date_modif}}" class="md-raised md-primary" ng-click="consulte.relance(p.id, $index)">Relancer</md-button>
 			</td>
 			<td>
-				<md-button class="md-raised md-warn" ng-click="consulte.updateData($event, p)">modifier</md-button>
+				<md-button class="md-raised md-warn" ng-click="consulte.updateData($event, p, $index)">Modifier</md-button>
 			</td>
 		</tr>
 	</table>

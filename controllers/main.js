@@ -8,18 +8,22 @@
 	function consulteController($scope, $http, $window, $mdDialog) {
 		var vm = this;
 
+		// Attributes
 		vm.sheet;
 		vm.count;
 		vm.isAddDisplayed;
 		vm.label;
 		vm.state;
+		vm.addApplication = {};
 
+		// Methods
 		vm.getConsulte = getConsulte;
 		vm.getConsultOnly = getConsultOnly;
 		vm.showAddForm = showAddForm;
 		vm.add = add;
 		vm.relance = relance;
 		vm.updateData = updateData;
+		vm
 
 		activate();
 
@@ -34,9 +38,8 @@
 			$http.post("models/consulte.php").then(function (res) {
 				vm.sheet = res.data;
 				vm.count = res.data.length;
-
+				
 				for (var i = 0; i < vm.count; i++) {
-					var today = moment().format("dddd DD MMMM YYYY");
 					vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
 				}
 
@@ -49,7 +52,6 @@
 				vm.count = res.data.length;
 
 				for (var i = 0; i < vm.count; i++) {
-					var today = moment().format("dddd DD MMMM YYYY");
 					vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
 				}
 			});
@@ -60,21 +62,27 @@
 		}
 
 		function add() {
-			$http.post("models/add.php", { 'nom': vm.label }).then(function (res) {
-				console.log("ADD", res.data);
-				$window.location.href = '/suiviCandidature';
+			vm.addApplication.etat = "En attente";
+			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
+			
+			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
+				//$window.location.href = '/suiviCandidature';
+				vm.sheet.unshift(vm.addApplication);
+
+				console.log(vm.sheet);
 			});
 		}
 
-		function relance(index) {
-			$http.post("models/relance.php", { 'id': index }).then(function (res) {
-				$window.location.href = '/suiviCandidature';
+		function relance(indexBDD, indexJSON) {
+			$http.post("models/relance.php", { 'id': indexBDD }).then(function (res) {
+				vm.sheet[indexJSON].etat = "Relancé";
+				vm.sheet[indexJSON].date_modif = moment().format("dddd DD MMMM YYYY");
 			});
 		}
 
-		function updateData(ev, d) {
+		function updateData(ev, d, indexJSON) {
 			$mdDialog.show({
-				locals: { data: d },
+				locals: { data: d, index: indexJSON },
 				controller: dialogController,
 				controllerAs: 'ctrl',
 				templateUrl: './views/dialog1.template.html',
@@ -90,18 +98,16 @@
 				});
 		};
 
-		function dialogController(data) {
+		function dialogController(data, index) {
 			this.data = data;
 
 			this.update = update;
 
 			function update(data) {
 				$http.post("models/update.php", { 'data': data }).then(function (res) {
-					
-					//$window.location.href = '/suiviCandidature';
+					vm.sheet[index].date_modif = moment().format("dddd DD MMMM YYYY");
 				});
 				$mdDialog.hide();
-				console.log('UPDATED', data);
 			}
 		}
 	}

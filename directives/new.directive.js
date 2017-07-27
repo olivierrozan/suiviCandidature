@@ -17,8 +17,7 @@
             controllerAs: 'vm',
             link: link,
             restrict: 'A',
-            scope: {
-            }
+            scope: {}
         };
         return directive;
 
@@ -29,6 +28,6 @@
     }
     /* @ngInject */
     function ControllerController() {
-
+        
     }
 })();

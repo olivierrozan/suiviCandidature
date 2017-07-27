@@ -2,17 +2,16 @@
 	'use strict';
 	angular
 		.module('mainApp', [])
-		.controller('consulteCtrl', consulteController);
+		.controller('sheetController', sheetController);
 
-	consulteController.$inject = ['$scope', '$http', '$window', '$mdDialog'];
-	function consulteController($scope, $http, $window, $mdDialog) {
+	sheetController.$inject = ['$scope', '$http', '$window', '$mdDialog', 'mainService'];
+	function sheetController($scope, $http, $window, $mdDialog, mainService) {
 		var vm = this;
 
 		// Attributes
 		vm.sheet;
 		vm.count;
 		vm.isAddDisplayed;
-		vm.label;
 		vm.state;
 		vm.addApplication = {};
 
@@ -23,7 +22,6 @@
 		vm.add = add;
 		vm.relance = relance;
 		vm.updateData = updateData;
-		vm
 
 		activate();
 
@@ -36,25 +34,25 @@
 
 		function getConsulte() {
 			$http.post("models/consulte.php").then(function (res) {
-				vm.sheet = res.data;
-				vm.count = res.data.length;
-				
-				for (var i = 0; i < vm.count; i++) {
-					vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
-				}
-
+				handleSheet(res);
 			});
 		}
 
 		function getConsultOnly() {
 			$http.post("models/consultOnly.php", { 'etat': vm.state }).then(function (res) {
-				vm.sheet = res.data;
-				vm.count = res.data.length;
-
-				for (var i = 0; i < vm.count; i++) {
-					vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
-				}
+				handleSheet(res);
 			});
+		}
+
+		function handleSheet(res) {
+			vm.sheet = res.data;
+			vm.count = res.data.length;
+
+			mainService.delay(vm.sheet);
+
+			for (var i = 0; i < vm.count; i++) {
+				vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
+			}
 		}
 
 		function showAddForm() {
@@ -64,9 +62,8 @@
 		function add() {
 			vm.addApplication.etat = "En attente";
 			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
-			
+
 			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
-				//$window.location.href = '/suiviCandidature';
 				vm.sheet.unshift(vm.addApplication);
 
 				console.log(vm.sheet);
@@ -92,7 +89,7 @@
 			})
 				.then(function () {
 					console.log('You said the information was .');
-					
+
 				}, function () {
 					console.log('You cancelled the dialog.');
 				});
@@ -100,13 +97,13 @@
 
 		function dialogController(data, index) {
 			this.data = data;
-
 			this.update = update;
 
 			function update(data) {
 				$http.post("models/update.php", { 'data': data }).then(function (res) {
 					vm.sheet[index].date_modif = moment().format("dddd DD MMMM YYYY");
 				});
+
 				$mdDialog.hide();
 			}
 		}

@@ -3,8 +3,8 @@
 	angular.module('app', ['ngRoute', 'mainApp', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngSanitize']).config(['$routeProvider', function ($routeProvider) {
 		$routeProvider.
 			when('/', {
-				templateUrl: 'views/consultes.html',
-				controller: 'consulteCtrl as consulte'
+				templateUrl: 'views/main.view.html',
+				controller: 'sheetController as sheetCtrl'
 			}).
 			otherwise({
 				redirectTo: '/'

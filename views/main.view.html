@@ -1,50 +1,50 @@
 <div layout="column" layout-align="center center">
 	<div layout="row" layout-align="start center">
-		<md-button class="md-raised md-primary" ng-click="consulte.getConsulte()">
+		<md-button class="md-raised md-primary" ng-click="sheetCtrl.getConsulte()">
 			Voir tout
 		</md-button>
 
-		<md-select aria-label="etat" ng-model="consulte.state" placeholder="Voir seulement" class="md-no-underline" 
-			ng-change="consulte.getConsultOnly()">
+		<md-select aria-label="etat" ng-model="sheetCtrl.state" placeholder="Voir seulement" class="md-no-underline" 
+			ng-change="sheetCtrl.getConsultOnly()">
 			<md-option value="En attente">En attente</md-option>
 			<md-option value="Relancé">Relancé</md-option>
 			<md-option value="Entretien">Entretien</md-option>
 			<md-option value="Refusé">Refusé</md-option>
 		</md-select>
 
-		<span>{{ consulte.count }} lignes au total</span>
+		<span id="count">{{ sheetCtrl.count }} lignes au total</span>
 	</div>
 
 	<div layout="row">
-		<md-button class="md-raised md-primary" ng-click="consulte.showAddForm()">Ajouter</md-button>
+		<md-button class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">Ajouter</md-button>
 	</div>
 
-	<form ng-if="consulte.isAddDisplayed" ng-submit="consulte.add()">
+	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()">
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label>Nom</label>
-				<input name="label" type="text" ng-model="consulte.addApplication.nom">
+				<input name="label" type="text" ng-model="sheetCtrl.addApplication.nom">
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Adresse</label>
-				<input name="address" type="text" ng-model="consulte.addApplication.adresse">
+				<input name="address" type="text" ng-model="sheetCtrl.addApplication.adresse">
 			</md-input-container>
 
 			<!-- <md-input-container class="md-block" flex-sm>
 				<label>Poste</label>
-				<input name="jobLabel" type="text" ng-model="consulte.poste">
+				<input name="jobLabel" type="text" ng-model="sheetCtrl.poste">
 			</md-input-container> -->
 		</div>
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label>Email</label>
-				<input name="email" type="email" ng-model="consulte.addApplication.email">
+				<input name="email" type="email" ng-model="sheetCtrl.addApplication.email">
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Commentaires</label>
-				<input name="commentaries" type="text" ng-model="consulte.addApplication.commentaires">
+				<input name="commentaries" type="text" ng-model="sheetCtrl.addApplication.commentaires">
 			</md-input-container>
 
 			<md-button class="md-raised md-primary" type="submit">Valider</md-button>
@@ -63,7 +63,7 @@
 			<th></th>
 		</tr>
 
-		<tr ng-class="{ 'blue': p.etat === 'Entretien', 'red': p.etat === 'Refusé' }" state="{{p.etat} }" ng-repeat="p in consulte.sheet" ng-model="consulte.sheet">
+		<tr ng-class="{ 'blue': p.etat === 'Entretien', 'red': p.etat === 'Refusé' }" ng-repeat="p in sheetCtrl.sheet" ng-model="sheetCtrl.sheet">
 			<form>
 				<td>{{p.nom}}</td>
 				<td>{{p.adresse}}</td>
@@ -73,10 +73,11 @@
 				<td>{{p.etat}}</td>
 			</form>
 			<td>
-				<md-button new time="{{p.date_modif}}" class="md-raised md-primary" ng-click="consulte.relance(p.id, $index)">Relancer</md-button>
+				<p ng-if='!p.reapply'>{{ p.delai }} jours</p>
+				<md-button ng-if='p.reapply' class="md-raised md-primary" ng-click="sheetCtrl.relance(p.id, $index)">Relancer</md-button>
 			</td>
 			<td>
-				<md-button class="md-raised md-warn" ng-click="consulte.updateData($event, p, $index)">Modifier</md-button>
+				<md-button class="md-raised md-warn" ng-click="sheetCtrl.updateData($event, p, $index)">Modifier</md-button>
 			</td>
 		</tr>
 	</table>

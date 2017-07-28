@@ -75,6 +75,9 @@
 				vm.sheet[indexJSON].etat = "Relancé";
 				vm.sheet[indexJSON].date_modif = moment().format("dddd DD MMMM YYYY");
 			});
+
+			vm.sheet[indexJSON].reapply = false;
+			vm.sheet[indexJSON]["delai"] = 10;
 		}
 
 		function updateData(ev, d, indexJSON) {

@@ -14,6 +14,7 @@
 		vm.isAddDisplayed;
 		vm.state;
 		vm.addApplication = {};
+		vm.regex = {};
 
 		// Methods
 		vm.getConsulte = getConsulte;
@@ -30,6 +31,11 @@
 		function activate() {
 			vm.isAddDisplayed = false;
 			vm.getConsulte();
+
+			vm.regex = {
+				"label": "^[a-zA-Z0-9-.& ]+$",
+				"tel": "^0[1-9]([.]?[0-9]{2}){4}$"
+			};
 		}
 
 		function getConsulte() {
@@ -64,10 +70,20 @@
 			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
 
 			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
-				vm.sheet.unshift(vm.addApplication);
+				
+				if (res.data === '0') {
+					vm.addApplication.reapply = false;
+					vm.addApplication.delai = 10;
+					vm.sheet.unshift(vm.addApplication);
 
-				console.log(vm.sheet);
+					console.log("OK added", vm.sheet);
+				} else {
+					console.log("duplicate");
+				}
+				
 			});
+
+			
 		}
 
 		function relance(indexBDD, indexJSON) {
@@ -82,7 +98,7 @@
 
 		function updateData(ev, d, indexJSON) {
 			$mdDialog.show({
-				locals: { data: d, index: indexJSON },
+				locals: { data: d, index: indexJSON, regex: vm.regex },
 				controller: dialogController,
 				controllerAs: 'ctrl',
 				templateUrl: './views/dialog1.template.html',
@@ -98,9 +114,10 @@
 				});
 		};
 
-		function dialogController(data, index) {
+		function dialogController(data, index, regex) {
 			this.data = data;
 			this.update = update;
+			this.regex = regex;
 
 			function update(data) {
 				$http.post("models/update.php", { 'data': data }).then(function (res) {

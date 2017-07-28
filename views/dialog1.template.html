@@ -1,22 +1,18 @@
 <div id="dialog">
-    <h2>Update</h2>
+    <h2>UPDATE</h2>
 
-    <form>
+    <form name="updateForm">
         <div layout-gt-xs="row">
             <md-input-container class="md-block" flex-sm>
                 <label>Nom</label>
-                <input name="label" type="text" ng-model="ctrl.data.nom">
+                <input name="label" type="text"  ng-trim="false" ng-model="ctrl.data.nom" ng-pattern="ctrl.regex.label" required />
             </md-input-container>
 
             <md-input-container class="md-block" flex-gt-xs>
                 <label>Adresse</label>
-                <input name="address" type="text" ng-model="ctrl.data.adresse">
+                <input name="address" type="text" ng-model="ctrl.data.adresse" />
             </md-input-container>
 
-            <!-- <md-input-container class="md-block" flex-sm>
-            <label>Poste</label>
-            <input name="jobLabel" type="text" ng-model="ctrl.jobLabel">
-        </md-input-container> -->
             <md-input-container class="md-block" flex-gt-xs>
                 <md-select aria-label="etat" ng-model="ctrl.data.etat">
                     <md-option value="En attente">En attente</md-option>
@@ -29,16 +25,21 @@
         <div layout-gt-xs="row">
             <md-input-container class="md-block" flex-sm>
                 <label>Email</label>
-                <input name="email" type="email" ng-model="ctrl.data.email">
+                <input name="email" type="email" ng-model="ctrl.data.email" />
             </md-input-container>
+
+            <md-input-container class="md-block" flex-sm>
+				<label>Tel</label>
+				<input name="tel" type="text"  ng-trim="false" ng-model="ctrl.data.tel" ng-pattern="ctrl.regex.tel" />
+			</md-input-container>
 
             <md-input-container class="md-block" flex-gt-xs>
                 <label>Commentaires</label>
-                <input name="commentaries" ng-model="ctrl.data.commentaires">
+                <input name="commentaries" ng-model="ctrl.data.commentaires" />
             </md-input-container>
         </div>
         <div layout-gt-xs="row">
-            <md-button class="md-raised md-primary" ng-click="ctrl.update(ctrl.data)">Update</md-button>
+            <md-button class="md-raised md-primary" ng-disabled="updateForm.$invalid" ng-click="ctrl.update(ctrl.data)">Update</md-button>
         </div>
     </form>
 </div>

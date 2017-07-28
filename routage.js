@@ -1,6 +1,7 @@
 (function () {
 	'use strict';
-	angular.module('app', ['ngRoute', 'mainApp', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngSanitize']).config(['$routeProvider', function ($routeProvider) {
+	angular.module('app', ['ngRoute', 'mainApp', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngSanitize'])
+		.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 		$routeProvider.
 			when('/', {
 				templateUrl: 'views/main.view.html',
@@ -9,5 +10,7 @@
 			otherwise({
 				redirectTo: '/'
 			});
+
+			$locationProvider.hashPrefix('');
 	}]);
 })();

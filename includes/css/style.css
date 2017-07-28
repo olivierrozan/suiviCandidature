@@ -74,6 +74,7 @@ th, td {
     width: 100px;
     text-align: center;
     border: 1px solid black;
+    font-weight: bold;
 }
 
 md-input-container {
@@ -112,4 +113,9 @@ md-select span {
 
 .minus {
     background: url('../../includes/icons/ic_add_white_24px.svg');
+}
+
+.error {
+    color: rgb(221,44,0);
+    font-weight: bold;
 }

@@ -1,4 +1,6 @@
 <div layout="column" layout-align="start center">
+	
+	<!-- Menu -->
 	<div layout="row" layout-align="start center">
 		<md-button class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">
 			 <md-icon ng-class="{ 'plus': sheetCtrl.isAddDisplayed, 'minus': !sheetCtrl.isAddDisplayed }" aria-label="Cake"></md-icon> 
@@ -21,43 +23,48 @@
 		<span id="count">{{ sheetCtrl.count }} lignes au total</span>
 	</div>
 
-	<div>
-		
-	</div>
-
-	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()">
+	<!-- Add -->
+	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()" name="addForm">
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
-				<label>Nom</label>
-				<input name="label" type="text" ng-model="sheetCtrl.addApplication.nom">
+				<label for="label">Nom</label>
+				<input name="label" id="label" type="text" ng-trim="false" ng-minlength="2" ng-model="sheetCtrl.addApplication.nom" 
+				ng-pattern="sheetCtrl.regex.label" required/>
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Adresse</label>
-				<input name="address" type="text" ng-model="sheetCtrl.addApplication.adresse">
+				<input name="address" type="text" ng-model="sheetCtrl.addApplication.adresse" />
 			</md-input-container>
 
 		</div>
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label>Email</label>
-				<input name="email" type="email" ng-model="sheetCtrl.addApplication.email">
+				<input name="email" type="email" ng-model="sheetCtrl.addApplication.email" />
+			</md-input-container>
+
+			<md-input-container class="md-block" flex-sm>
+				<label>Tel</label>
+				<input name="tel" type="text" ng-model="sheetCtrl.addApplication.tel"  ng-trim="false" ng-pattern="sheetCtrl.regex.tel" />
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-xs>
 				<label>Commentaires</label>
-				<input name="commentaries" type="text" ng-model="sheetCtrl.addApplication.commentaires">
+				<input name="commentaries" type="text" ng-model="sheetCtrl.addApplication.commentaires" />
 			</md-input-container>
 
-			<md-button class="md-raised md-primary" type="submit">Valider</md-button>
+			<md-button class="md-raised md-primary" type="submit" ng-disabled="addForm.$invalid" />Valider</md-button>
 		</div>
 	</form>
 
+	<!-- main table -->
 	<table>
 		<tr>
 			<th>NOM</th>
 			<th>ADRESSE</th>
 			<th>EMAIL</th>
+			<th>TEL</th>
 			<th>DATE MODIF</th>
 			<th>COMMENTAIRES</th>
 			<th>ETAT</th>
@@ -70,6 +77,7 @@
 				<td>{{p.nom}}</td>
 				<td>{{p.adresse}}</td>
 				<td>{{p.email}}</td>
+				<td>{{p.tel}}</td>
 				<td>{{p.date_modif}}</td>
 				<td>{{p.commentaires}}</td>
 				<td>{{p.etat}}</td>

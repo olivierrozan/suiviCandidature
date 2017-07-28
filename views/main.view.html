@@ -1,10 +1,16 @@
-<div layout="column" layout-align="center center">
+<div layout="column" layout-align="start center">
 	<div layout="row" layout-align="start center">
+		<md-button class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">
+			 <md-icon ng-class="{ 'plus': sheetCtrl.isAddDisplayed, 'minus': !sheetCtrl.isAddDisplayed }" aria-label="Cake"></md-icon> 
+			Ajouter
+		</md-button>
+		
 		<md-button class="md-raised md-primary" ng-click="sheetCtrl.getConsulte()">
+			<md-icon md-svg-src="./includes/icons/ic_done_all_white_24px.svg" aria-label="Cake"></md-icon>
 			Voir tout
 		</md-button>
 
-		<md-select aria-label="etat" ng-model="sheetCtrl.state" placeholder="Voir seulement" class="md-no-underline" 
+		<md-select aria-label="etat" ng-model="sheetCtrl.state" placeholder="Voir seulement"
 			ng-change="sheetCtrl.getConsultOnly()">
 			<md-option value="En attente">En attente</md-option>
 			<md-option value="Relancé">Relancé</md-option>
@@ -15,8 +21,8 @@
 		<span id="count">{{ sheetCtrl.count }} lignes au total</span>
 	</div>
 
-	<div layout="row">
-		<md-button class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">Ajouter</md-button>
+	<div>
+		
 	</div>
 
 	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()">
@@ -31,10 +37,6 @@
 				<input name="address" type="text" ng-model="sheetCtrl.addApplication.adresse">
 			</md-input-container>
 
-			<!-- <md-input-container class="md-block" flex-sm>
-				<label>Poste</label>
-				<input name="jobLabel" type="text" ng-model="sheetCtrl.poste">
-			</md-input-container> -->
 		</div>
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
@@ -51,7 +53,7 @@
 		</div>
 	</form>
 
-	<table border="1">
+	<table>
 		<tr>
 			<th>NOM</th>
 			<th>ADRESSE</th>
@@ -74,10 +76,16 @@
 			</form>
 			<td>
 				<p ng-if='!p.reapply'>{{ p.delai }} jours</p>
-				<md-button ng-if='p.reapply' class="md-raised md-primary" ng-click="sheetCtrl.relance(p.id, $index)">Relancer</md-button>
+				<md-button ng-if='p.reapply' class="md-raised md-primary" ng-click="sheetCtrl.relance(p.id, $index)">
+					<md-icon md-svg-src="./includes/icons/ic_flash_on_white_24px.svg" aria-label="Cake"></md-icon>
+					Relancer
+				</md-button>
 			</td>
 			<td>
-				<md-button class="md-raised md-warn" ng-click="sheetCtrl.updateData($event, p, $index)">Modifier</md-button>
+				<md-button class="md-raised md-warn" ng-click="sheetCtrl.updateData($event, p, $index)">
+					<md-icon md-svg-src="./includes/icons/ic_mode_edit_white_24px.svg" aria-label="Cake"></md-icon>
+					Modifier
+				</md-button>
 			</td>
 		</tr>
 	</table>

@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- Add -->
-	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()" name="addForm">
+	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add($event)" name="addForm">
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label for="label">Nom</label>

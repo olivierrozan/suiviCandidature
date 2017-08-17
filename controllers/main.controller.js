@@ -4,8 +4,8 @@
 		.module('mainApp', [])
 		.controller('sheetController', sheetController);
 
-	sheetController.$inject = ['$scope', '$http', '$window', '$mdDialog', 'mainService'];
-	function sheetController($scope, $http, $window, $mdDialog, mainService) {
+	sheetController.$inject = ['$scope', '$http', '$route', '$mdDialog', 'mainService'];
+	function sheetController($scope, $http, $route, $mdDialog, mainService) {
 		var vm = this;
 
 		// Attributes
@@ -65,25 +65,46 @@
 			vm.isAddDisplayed = !vm.isAddDisplayed;
 		}
 
-		function add() {
+		function add(ev) {
 			vm.addApplication.etat = "En attente";
 			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
 
 			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
-				
+
 				if (res.data === '0') {
 					vm.addApplication.reapply = false;
 					vm.addApplication.delai = 10;
-					vm.sheet.unshift(vm.addApplication);
+					//vm.sheet.unshift(vm.addApplication);
 
 					console.log("OK added", vm.sheet);
+
+					$mdDialog.show(
+						$mdDialog.alert()
+							.parent(angular.element(document.querySelector('#popupContainer')))
+							.clickOutsideToClose(true)
+							.title('Successfully added !!')
+							.textContent('Please refresh the page')
+							.ariaLabel('Alert Dialog Demo')
+							.ok('Refresh')
+							.targetEvent(ev)
+					).then(function () {
+						$route.reload();
+					});
 				} else {
 					console.log("duplicate");
-				}
-				
-			});
 
-			
+					$mdDialog.show(
+						$mdDialog.alert()
+							.parent(angular.element(document.querySelector('#popupContainer')))
+							.clickOutsideToClose(true)
+							.title('No creation !')
+							.textContent('The entry already exists !!')
+							.ariaLabel('Alert Dialog Demo')
+							.ok('My bad !')
+							.targetEvent(ev)
+					);
+				}
+			});
 		}
 
 		function relance(indexBDD, indexJSON) {

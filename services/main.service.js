@@ -16,7 +16,7 @@
 			var today = moment();
 			
 			for (var i = 0; i < sheet.length; i++) {
-				sheet[i]["date_modif_init"] = moment(sheet[i]["date_modif"]);
+				sheet[i]["date_modif_init"] = moment(sheet[i]["updatedAt"]);
 				sheet[i]["delai"] = today.diff(sheet[i]["date_modif_init"], "days")
 
 				if (sheet[i]["delai"] < 10) {

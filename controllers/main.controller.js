@@ -57,7 +57,7 @@
 			mainService.delay(vm.sheet);
 
 			for (var i = 0; i < vm.count; i++) {
-				vm.sheet[i]["date_modif"] = moment(vm.sheet[i]["date_modif"]).format("dddd DD MMMM YYYY");
+				vm.sheet[i]["updatedAt"] = moment(vm.sheet[i]["updatedAt"]).format("dddd DD MMMM YYYY");
 			}
 		}
 
@@ -67,7 +67,7 @@
 
 		function add(ev) {
 			vm.addApplication.etat = "En attente";
-			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
+			vm.addApplication.updatedAt = moment().format("dddd DD MMMM YYYY");
 
 			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
 				if (res.data === '0') {
@@ -108,7 +108,7 @@
 		function relance(indexBDD, indexJSON) {
 			$http.post("models/relance.php", { 'id': indexBDD }).then(function (res) {
 				vm.sheet[indexJSON].etat = "Relancé";
-				vm.sheet[indexJSON].date_modif = moment().format("dddd DD MMMM YYYY");
+				vm.sheet[indexJSON].updatedAt = moment().format("dddd DD MMMM YYYY");
 			});
 
 			vm.sheet[indexJSON].reapply = false;
@@ -140,7 +140,7 @@
 
 			function update(data) {
 				$http.post("models/update.php", { 'data': data }).then(function (res) {
-					vm.sheet[index].date_modif = moment().format("dddd DD MMMM YYYY");
+					vm.sheet[index].updatedAt = moment().format("dddd DD MMMM YYYY");
 				});
 
 				$mdDialog.hide();

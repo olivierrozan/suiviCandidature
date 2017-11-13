@@ -22,17 +22,20 @@ foreach ($arr as $one) {
 }
 
 if ($valid === 0) {
-    $query1 = $db->prepare(' INSERT INTO sheet(nom, adresse, etat, date_modif, email, tel, commentaires) 
-                        VALUES(:nom, :adresse, :etat, :date, :email, :tel, :commentaires) ');
+    $query1 = $db->prepare(' INSERT INTO sheet(nom, adresse, etat, date_modif, email, tel, commentaires, createdAt, updatedAt) 
+                        VALUES(:nom, :adresse, :etat, :ddate, :email, :tel, :commentaires, :createdAt, :updatedAt) ');
     $query1->execute(array(
         'nom' => $data->data->nom,
         'adresse' => isset($data->data->adresse) ? $data->data->adresse : "",
         'etat' => 'En attente',
-        'date' => date("Y-m-d"),
+        'ddate' => date("Y-m-d"),
         'email' => isset($data->data->email) ? $data->data->email : "", 
         'tel' => isset($data->data->tel) ? $data->data->tel : "", 
-        'commentaires' => isset($data->data->commentaires) ? $data->data->commentaires : ""
+        'commentaires' => isset($data->data->commentaires) ? $data->data->commentaires : "",
+        'createdAt' => date("Y-m-d"),
+        'updatedAt' => date("Y-m-d")
     ));
+   
 }
 
 echo $json_response = json_encode($valid);

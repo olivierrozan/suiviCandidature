@@ -70,14 +70,11 @@
 			vm.addApplication.date_modif = moment().format("dddd DD MMMM YYYY");
 
 			$http.post("models/add.php", { 'data': vm.addApplication }).then(function (res) {
-
 				if (res.data === '0') {
 					vm.addApplication.reapply = false;
 					vm.addApplication.delai = 10;
-					//vm.sheet.unshift(vm.addApplication);
 
 					console.log("OK added", vm.sheet);
-
 					$mdDialog.show(
 						$mdDialog.alert()
 							.parent(angular.element(document.querySelector('#popupContainer')))
@@ -105,6 +102,7 @@
 					);
 				}
 			});
+			
 		}
 
 		function relance(indexBDD, indexJSON) {

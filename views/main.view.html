@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- Add -->
-	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add()" name="addForm">
+	<form ng-if="sheetCtrl.isAddDisplayed" ng-submit="sheetCtrl.add($event)" name="addForm">
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
 				<label for="label">Nom</label>
@@ -78,7 +78,7 @@
 				<td>{{p.adresse}}</td>
 				<td>{{p.email}}</td>
 				<td>{{p.tel}}</td>
-				<td>{{p.date_modif}}</td>
+				<td>{{p.updatedAt}}</td>
 				<td>{{p.commentaires}}</td>
 				<td>{{p.etat}}</td>
 			</form>

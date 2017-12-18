@@ -2,7 +2,7 @@
 	
 	<!-- Menu -->
 	<div layout="row" layout-align="start center">
-		<md-button class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">
+		<md-button id="addButton" class="md-raised md-primary" ng-click="sheetCtrl.showAddForm()">
 			 <md-icon ng-class="{ 'plus': sheetCtrl.isAddDisplayed, 'minus': !sheetCtrl.isAddDisplayed }" aria-label="Cake"></md-icon> 
 			Ajouter
 		</md-button>
@@ -40,7 +40,7 @@
 		</div>
 		<div layout-gt-xs="row">
 			<md-input-container class="md-block" flex-sm>
-				<label>Email</label>
+				<label>Email {{sheetCtrl.addApplication.email.$valid}}</label>
 				<input name="email" type="email" ng-model="sheetCtrl.addApplication.email" />
 			</md-input-container>
 

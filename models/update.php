@@ -6,7 +6,7 @@ $data = json_decode($post_date);
 
 $query1 = $db->prepare(' UPDATE sheet SET nom=:nom, adresse=:adresse, etat=:etat, email=:email, tel=:tel, commentaires=:commentaires, updatedAt=:date WHERE id=' . $data->data->id);
 $query1->execute(array(
-    'nom' => $data->data->nom,
+    'nom' => strtoupper($data->data->nom),
     'adresse' => $data->data->adresse,
     'etat' => $data->data->etat,
     'date' => date("Y-m-d"),

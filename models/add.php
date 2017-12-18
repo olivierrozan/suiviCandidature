@@ -25,7 +25,7 @@ if ($valid === 0) {
     $query1 = $db->prepare(' INSERT INTO sheet(nom, adresse, etat, email, tel, commentaires, createdAt, updatedAt) 
                         VALUES(:nom, :adresse, :etat, :email, :tel, :commentaires, :createdAt, :updatedAt) ');
     $query1->execute(array(
-        'nom' => $data->data->nom,
+        'nom' => strtoupper($data->data->nom),
         'adresse' => isset($data->data->adresse) ? $data->data->adresse : "",
         'etat' => 'En attente',
         'email' => isset($data->data->email) ? $data->data->email : "", 
